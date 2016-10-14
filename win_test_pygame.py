@@ -52,3 +52,5 @@ while 1:
     pygame.display.flip()
 
     clock.tick(60)
+
+# TODO: Adapt pt1 and 2 so that they match the scaling
