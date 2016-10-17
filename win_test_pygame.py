@@ -77,6 +77,5 @@ while 1:
 
     clock.tick(60)
 
-# TODO: Modify point removal so that image gets copied from min x and y to max x and y instead of just around the points
 # TODO: Draw rectangle around area marked by points
 # TODO: Known bug fully or partially deletes circles from the opposite color sometimes
