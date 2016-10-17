@@ -42,10 +42,8 @@ while 1:
                 pt1x, pt1y, pt2x, pt2y = \
                     pf.draw_new_rect((pt1x, pt1y, pt2x, pt2y), img_c, (originx, originy),
                                      scale, mouse_coords, event.button)
-            if event.button == 4:
-                scale += 0.05
-            elif event.button == 5 and scale > 0:
-                scale -= 0.05
+            if event.button == 4 or event.button == 5:
+                scale = pf.scale_img(scale, event.button)
 
     originx, originy = pf.move_image(originx, originy)
 

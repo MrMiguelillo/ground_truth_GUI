@@ -3,6 +3,7 @@ import pygame
 
 class PygameFunctions:
     MOVEMENT_SPEED = 10
+    SCALE_INCREMENT = 0.05
 
     @staticmethod
     def move_image(orx, ory):
@@ -52,3 +53,12 @@ class PygameFunctions:
             new_coords = (coords[0], coords[1], newx, newy)
 
         return new_coords
+
+    @staticmethod
+    def scale_img(scale, button):
+        if button == 4:
+            scale += PygameFunctions.SCALE_INCREMENT
+        elif button == 5 and scale > 0:
+            scale -= PygameFunctions.SCALE_INCREMENT
+
+        return scale
