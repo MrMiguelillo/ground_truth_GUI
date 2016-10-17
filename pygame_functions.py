@@ -41,6 +41,7 @@ class PygameFunctions:
     @staticmethod
     def draw_new_rect(coords, img, img_origin, scale, mouse_coords, button):
         newx, newy = (int((mouse_coords[0] - img_origin[0]) / scale), int((mouse_coords[1] - img_origin[1]) / scale))
+        new_coords = 0
         if button == 1:
             pygame.draw.circle(img, (255, 0, 0), (newx, newy), 5)
             pygame.draw.rect(img, (0, 255, 0), (newx, newy, coords[2] - newx, coords[3] - newy), 3)

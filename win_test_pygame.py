@@ -36,28 +36,12 @@ while 1:
         if event.type == pygame.QUIT or (event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE):
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
-                img_c.blit(doc_img, (rect_coords[0]-5, rect_coords[1]-5), area=(rect_coords[0]-5,
-                                                                                rect_coords[1]-5,
-                                                                                rect_coords[2]-rect_coords[0]+10,
-                                                                                rect_coords[3]-rect_coords[1]+10))
-                pygame.draw.circle(img_c, (0, 0, 255), (pt2x, pt2y), 5)
-                temp_coords = pygame.mouse.get_pos()
-                pt1x, pt1y = (int((temp_coords[0] - originx)/scale), int((temp_coords[1] - originy)/scale))
-                pygame.draw.circle(img_c, (255, 0, 0), (pt1x, pt1y), 5)
-                pygame.draw.rect(img_c, (0, 255, 0), (pt1x, pt1y, pt2x-pt1x, pt2y-pt1y), 3)
-            if event.button == 3:
-                rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
-                img_c.blit(doc_img, (rect_coords[0] - 5, rect_coords[1] - 5), area=(rect_coords[0] - 5,
-                                                                                    rect_coords[1] - 5,
-                                                                                    rect_coords[2] - rect_coords[0] + 10,
-                                                                                    rect_coords[3] - rect_coords[1] + 10))
-                pygame.draw.circle(img_c, (255, 0, 0), (pt1x, pt1y), 5)
-                temp_coords = pygame.mouse.get_pos()
-                pt2x, pt2y = (int((temp_coords[0] - originx)/scale), int((temp_coords[1] - originy)/scale))
-                pygame.draw.circle(img_c, (0, 0, 255), (pt2x, pt2y), 5)
-                pygame.draw.rect(img_c, (0, 255, 0), (pt2x, pt2y, pt1x-pt2x, pt1y-pt2y), 3)
+            if event.button == 1 or event.button == 3:
+                pf.clear_old_rect(img_c, doc_img, (pt1x, pt1y, pt2x, pt2y), event.button)
+                mouse_coords = pygame.mouse.get_pos()
+                pt1x, pt1y, pt2x, pt2y = \
+                    pf.draw_new_rect((pt1x, pt1y, pt2x, pt2y), img_c, (originx, originy),
+                                     scale, mouse_coords, event.button)
             if event.button == 4:
                 scale += 0.05
             elif event.button == 5 and scale > 0:
