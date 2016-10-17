@@ -12,7 +12,7 @@ def calc_rect(coords):
 
 pygame.init()
 
-size = width, height = 600, 400
+size = width, height = 1200, 650
 speed = [1, 1]
 black = 0, 0, 0
 
@@ -37,10 +37,10 @@ while 1:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
-                img_c.blit(doc_img, (rect_coords[0]-5, rect_coords[1]-5), area=(rect_coords[0]-5,
-                                                                                rect_coords[1]-5,
-                                                                                rect_coords[2]+5,
-                                                                                rect_coords[3]+5))
+                img_c.blit(doc_img, (rect_coords[0]-7, rect_coords[1]-7), area=(rect_coords[0]-7,
+                                                                                rect_coords[1]-7,
+                                                                                rect_coords[2]-rect_coords[0]+12,
+                                                                                rect_coords[3]-rect_coords[1]+12))
                 pygame.draw.circle(img_c, (0, 0, 255), (pt2x, pt2y), 5)
                 temp_coords = pygame.mouse.get_pos()
                 pt1x, pt1y = (int((temp_coords[0] - originx)/scale), int((temp_coords[1] - originy)/scale))
@@ -49,10 +49,10 @@ while 1:
                 pygame.draw.rect(img_c, (0, 255, 0), (pt1x, pt1y, pt2x-pt1x, pt2y-pt1y), 3)
             if event.button == 3:
                 rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
-                img_c.blit(doc_img, (rect_coords[0] - 5, rect_coords[1] - 5), area=(rect_coords[0] - 5,
-                                                                                    rect_coords[1] - 5,
-                                                                                    rect_coords[2] + 5,
-                                                                                    rect_coords[3] + 5))
+                img_c.blit(doc_img, (rect_coords[0] - 7, rect_coords[1] - 7), area=(rect_coords[0] - 7,
+                                                                                    rect_coords[1] - 7,
+                                                                                    rect_coords[2] - rect_coords[0] + 12,
+                                                                                    rect_coords[3] - rect_coords[1] + 12))
                 pygame.draw.circle(img_c, (255, 0, 0), (pt1x, pt1y), 5)
                 temp_coords = pygame.mouse.get_pos()
                 pt2x, pt2y = (int((temp_coords[0] - originx)/scale), int((temp_coords[1] - originy)/scale))
@@ -65,13 +65,13 @@ while 1:
                 scale -= 0.05
 
     if pygame.key.get_pressed()[pygame.K_LEFT] != 0:
-        originx -= movement_speed
-    elif pygame.key.get_pressed()[pygame.K_RIGHT] != 0:
         originx += movement_speed
+    elif pygame.key.get_pressed()[pygame.K_RIGHT] != 0:
+        originx -= movement_speed
     if pygame.key.get_pressed()[pygame.K_UP] != 0:
-        originy -= movement_speed
-    elif pygame.key.get_pressed()[pygame.K_DOWN] != 0:
         originy += movement_speed
+    elif pygame.key.get_pressed()[pygame.K_DOWN] != 0:
+        originy -= movement_speed
 
     image = pygame.transform.scale(img_c, (int(img_c.get_width() * scale), int(img_c.get_height() * scale)))
 
@@ -81,4 +81,4 @@ while 1:
 
     clock.tick(60)
 
-# TODO: Known bug fully or partially deletes circles from the opposite color sometimes
+# TODO: Create control panel
