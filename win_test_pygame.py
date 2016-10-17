@@ -45,6 +45,8 @@ while 1:
                 temp_coords = pygame.mouse.get_pos()
                 pt1x, pt1y = (int((temp_coords[0] - originx)/scale), int((temp_coords[1] - originy)/scale))
                 pygame.draw.circle(img_c, (255, 0, 0), (pt1x, pt1y), 5)
+                rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
+                pygame.draw.rect(img_c, (0, 255, 0), (pt1x, pt1y, pt2x-pt1x, pt2y-pt1y), 3)
             if event.button == 3:
                 rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
                 img_c.blit(doc_img, (rect_coords[0] - 5, rect_coords[1] - 5), area=(rect_coords[0] - 5,
@@ -55,6 +57,8 @@ while 1:
                 temp_coords = pygame.mouse.get_pos()
                 pt2x, pt2y = (int((temp_coords[0] - originx)/scale), int((temp_coords[1] - originy)/scale))
                 pygame.draw.circle(img_c, (0, 0, 255), (pt2x, pt2y), 5)
+                rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
+                pygame.draw.rect(img_c, (0, 255, 0), (pt2x, pt2y, pt1x-pt2x, pt1y-pt2y), 3)
             if event.button == 4:
                 scale += 0.05
             elif event.button == 5 and scale > 0:
