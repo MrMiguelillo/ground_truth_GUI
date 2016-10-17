@@ -1,22 +1,12 @@
-import tkinter
+import tkinter as tk
+from tkinter import messagebox
 
-top = tkinter.Tk()
+top = tk.Tk()
 
-startframe = tkinter.Frame(top)
-C = tkinter.Canvas(startframe, height=400, width=600)
+def helloCallBack():
+   tk.messagebox.showinfo("Hello Python", "Hello World")
 
-startframe.pack()
-C.pack()
+B = tk.Button(top, text="Hello", command=helloCallBack)
 
-photo = tkinter.PhotoImage(name=r'D:\PycharmProjects\Ground_truth_GUI\python-logo.gif')
-top.photo = photo
-C.create_image((50, 50), image=photo, anchor='nw')
-
-# label = tkinter.Label(image=photo)
-# label.image = photo # keep a reference!
-# label.pack()
-
-# coord = 10, 50, 240, 210
-# arc = C.create_arc(coord, start=0, extent=180, fill="red")
-
+B.pack()
 top.mainloop()
