@@ -2,15 +2,6 @@ import sys
 import pygame
 from pygame_functions import PygameFunctions as pf
 
-
-def calc_rect(coords):
-    minx = min(coords[0], coords[2])
-    maxx = max(coords[0], coords[2])
-    miny = min(coords[1], coords[3])
-    maxy = max(coords[1], coords[3])
-
-    return minx, miny, maxx, maxy
-
 pygame.init()
 
 size = width, height = 1200, 650
