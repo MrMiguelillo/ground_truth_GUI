@@ -32,7 +32,7 @@ image = pygame.transform.scale(img_c, (int(doc_img.get_width() * scale), int(doc
 
 while 1:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or (event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE):
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
@@ -81,5 +81,4 @@ while 1:
 
     clock.tick(60)
 
-# TODO: Draw rectangle around area marked by points
 # TODO: Known bug fully or partially deletes circles from the opposite color sometimes
