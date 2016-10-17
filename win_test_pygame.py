@@ -1,6 +1,15 @@
 import sys
 import pygame
 
+
+def calc_rect(coords):
+    minx = min(coords[0], coords[2])
+    maxx = max(coords[0], coords[2])
+    miny = min(coords[1], coords[3])
+    maxy = max(coords[1], coords[3])
+
+    return minx, miny, maxx, maxy
+
 pygame.init()
 
 size = width, height = 600, 400
@@ -27,12 +36,22 @@ while 1:
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
-                img_c.blit(doc_img, (pt1x-5, pt1y-5), area=(pt1x-5, pt1y-5, pt1x+5, pt1y+5))
+                rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
+                img_c.blit(doc_img, (rect_coords[0]-5, rect_coords[1]-5), area=(rect_coords[0]-5,
+                                                                                rect_coords[1]-5,
+                                                                                rect_coords[2]+5,
+                                                                                rect_coords[3]+5))
+                pygame.draw.circle(img_c, (0, 0, 255), (pt2x, pt2y), 5)
                 temp_coords = pygame.mouse.get_pos()
                 pt1x, pt1y = (int((temp_coords[0] - originx)/scale), int((temp_coords[1] - originy)/scale))
                 pygame.draw.circle(img_c, (255, 0, 0), (pt1x, pt1y), 5)
             if event.button == 3:
-                img_c.blit(doc_img, (pt2x - 5, pt2y - 5), area=(pt2x - 5, pt2y - 5, pt2x + 5, pt2y + 5))
+                rect_coords = calc_rect((pt1x, pt1y, pt2x, pt2y))
+                img_c.blit(doc_img, (rect_coords[0] - 5, rect_coords[1] - 5), area=(rect_coords[0] - 5,
+                                                                                    rect_coords[1] - 5,
+                                                                                    rect_coords[2] + 5,
+                                                                                    rect_coords[3] + 5))
+                pygame.draw.circle(img_c, (255, 0, 0), (pt1x, pt1y), 5)
                 temp_coords = pygame.mouse.get_pos()
                 pt2x, pt2y = (int((temp_coords[0] - originx)/scale), int((temp_coords[1] - originy)/scale))
                 pygame.draw.circle(img_c, (0, 0, 255), (pt2x, pt2y), 5)
