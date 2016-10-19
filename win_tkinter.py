@@ -1,8 +1,9 @@
 import tkinter as tk
 import database
 
+
 root = tk.Tk()
-root.geometry("400x300+30+30")
+root.geometry("400x500+30+30")
 
 db = database.Database('docs_osborne', 'testuser', 'test123', ('sellos', 'documentos'))
 db.load_seals()
@@ -51,6 +52,13 @@ seal_type.set(OPTIONS[0])  # initial value
 option = tk.OptionMenu(root, seal_type, *OPTIONS)
 option.place(x=55, y=70)
 
+img_route = db.seal_list[0].img_route
+img_route = img_route.replace("\\", "/")
+photo = tk.PhotoImage(file=img_route)
+seal_label = tk.Label(image=photo)
+seal_label.place(x=55, y=150)
+
 root.mainloop()
 
-# TODO: Create control panel
+# TODO: make seal image label change acording to which seal is currently selected
+# TODO: add 'new seal' button plus its corresponding form
