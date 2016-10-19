@@ -1,6 +1,6 @@
 import database
 
-tables = ['sellos', 'documentos']
+tables = ('sellos', 'documentos')
 db = database.Database('docs_osborne', 'testuser', 'test123', tables)
 db.load_seals()
 

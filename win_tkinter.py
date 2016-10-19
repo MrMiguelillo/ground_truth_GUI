@@ -1,8 +1,11 @@
 import tkinter as tk
-# from tkinter import messagebox
+import database
 
 root = tk.Tk()
 root.geometry("400x300+30+30")
+
+db = database.Database('docs_osborne', 'testuser', 'test123', ('sellos', 'documentos'))
+db.load_seals()
 
 # POINT 1 DISPLAY
 pt1_label = tk.Label(root, text="Point 1:")
@@ -38,11 +41,9 @@ pt2y_value.set("hola")
 type_label = tk.Label(root, text="Type:")
 type_label.place(x=20, y=70)
 
-OPTIONS = [
-    "egg",
-    "bunny",
-    "chicken"
-]
+OPTIONS = []
+for seal in db.seal_list:
+    OPTIONS.append(seal.name)
 
 seal_type = tk.StringVar(root)
 seal_type.set(OPTIONS[0])  # initial value
