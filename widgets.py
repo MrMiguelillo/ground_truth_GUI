@@ -23,7 +23,6 @@ class SealsList:
 
         self.change_button = tk.Button(master, text="OK", command=self.on_change_item)
 
-
     def on_change_item(self):
         index = self.OPTIONS.index(self.curr_seal_type.get())
         # change image
@@ -32,7 +31,6 @@ class SealsList:
         photo = tk.PhotoImage(file=path)
         self.canvas.itemconfig(self.seal_img, image=photo)
         self.canvas.image = photo
-
 
     def place_items(self):
         self.label.place(x=self.x, y=self.y)

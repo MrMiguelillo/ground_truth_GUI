@@ -46,4 +46,3 @@ while 1:
 
     clock.tick(60)
 
-# TODO: Edit program to use functions

@@ -48,5 +48,4 @@ seal_type_list.place_items()
 
 root.mainloop()
 
-# TODO: make seal image label change acording to which seal is currently selected
 # TODO: add 'new seal' button plus its corresponding form
