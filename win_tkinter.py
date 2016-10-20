@@ -4,7 +4,7 @@ import widgets
 
 
 root = tk.Tk()
-root.geometry("400x500+30+30")
+root.geometry("700x570+30+30")
 
 db = database.Database('docs_osborne', 'testuser', 'test123', ('sellos', 'documentos'))
 db.load_seals()
@@ -41,7 +41,7 @@ pt2y_value.set("hola")
 
 # SEAL SELECTION ITEMS
 seal_type_list = widgets.SealsList(root, db)
-seal_type_list.init_option_menu()
+# seal_type_list.init_option_menu()
 seal_type_list.x = 20
 seal_type_list.y = 70
 seal_type_list.place_items()
