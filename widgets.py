@@ -23,10 +23,11 @@ class SealsList:
     def on_change_item(self):
         index = self.OPTIONS.index(self.curr_seal_type.get())
         # change image
-        path = self.db.seal_list[0].img_route
+        path = self.db.seal_list[index].img_route
         path = path.replace("\\", "/")
         photo = tk.PhotoImage(file=path)
-        # self.canvas.itemconfig(self.seal_img, image=photo)
+        self.canvas.itemconfig(self.seal_img, image=photo)
+        self.canvas.image = photo
 
     def init_option_menu(self):
         self.option_menu.configure(command=self.on_change_item())
