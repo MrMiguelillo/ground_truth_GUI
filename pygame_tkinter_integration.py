@@ -10,4 +10,3 @@ while 1:
     control_panel.root.update()
     control_panel.root.update_idletasks()
 
-# TODO: POR AQUÍ VA LA COSA

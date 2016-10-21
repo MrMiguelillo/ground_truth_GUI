@@ -55,5 +55,3 @@ if __name__ == "__main__":
     win = WinPygame()
     while 1:
         win.main_loop()
-
-# TODO: Transform this into a class

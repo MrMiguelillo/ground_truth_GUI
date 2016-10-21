@@ -53,5 +53,4 @@ if __name__ == "__main__":
         win.root.update_idletasks()
         win.root.update()
 
-# TODO: Transform this into a class
 # TODO: add 'new seal' button plus its corresponding form
