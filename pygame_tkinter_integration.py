@@ -1,9 +1,3 @@
-import sys
-import pygame
-from pygame_functions import PygameFunctions as pf
-import tkinter as tk
-import database
-import widgets
 import win_tkinter
 import win_pygame
 
