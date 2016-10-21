@@ -6,7 +6,7 @@ import widgets
 class WinTkinter:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.geometry("700x570+30+30")
+        self.root.geometry("500x570+30+30")
         
         self.db = database.Database('docs_osborne', 'testuser', 'test123', ('sellos', 'documentos'))
         self.db.load_seals()
