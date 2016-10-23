@@ -1,6 +1,7 @@
 import sys
 import pygame
 from pygame_functions import PygameFunctions as pf
+import win_tkinter
 
 
 class WinPygame:
@@ -26,6 +27,8 @@ class WinPygame:
         self.image = pygame.transform.scale(self.img_c, (int(self.doc_img.get_width() * self.scale),
                                                          int(self.doc_img.get_height() * self.scale)))
 
+        self.control_panel = win_tkinter.WinControlPanel((self.pt1x, self.pt1y, self.pt2x, self.pt2y))
+
     def main_loop(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE):
@@ -37,16 +40,18 @@ class WinPygame:
                     self.pt1x, self.pt1y, self.pt2x, self.pt2y = \
                         pf.draw_new_rect((self.pt1x, self.pt1y, self.pt2x, self.pt2y), self.img_c, (self.originx, self.originy),
                                          self.scale, mouse_coords, event.button)
+                    self.control_panel.update_labels((self.pt1x, self.pt1y, self.pt2x, self.pt2y))
+
                 if event.button == 4 or event.button == 5:
                     self.scale = pf.scale_img(self.scale, event.button)
 
-        originx, originy = pf.move_image(self.originx, self.originy)
+        self.originx, self.originy = pf.move_image(self.originx, self.originy)
 
         self.image = pygame.transform.scale(self.img_c, (int(self.img_c.get_width() * self.scale),
                                                          int(self.img_c.get_height() * self.scale)))
 
         self.screen.fill(self.black)
-        self.screen.blit(self.image, (originx, originy))
+        self.screen.blit(self.image, (self.originx, self.originy))
         pygame.display.flip()
 
         self.clock.tick(60)
@@ -55,3 +60,5 @@ if __name__ == "__main__":
     win = WinPygame()
     while 1:
         win.main_loop()
+
+# TODO: Turn pt1 and pt2 lists instead
