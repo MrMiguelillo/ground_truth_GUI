@@ -5,7 +5,7 @@ import win_tkinter
 
 
 class WinPygame:
-    def __init__(self):
+    def __init__(self, path=None):
         self.size = self.width, self.height = 1200, 650
         self.speed = [1, 1]
         self.black = 0, 0, 0
@@ -14,7 +14,11 @@ class WinPygame:
         
         self.screen = pygame.display.set_mode(self.size)
 
-        self.doc_img = pygame.image.load(r"C:\Users\usuario\Desktop\document\1823-L119.M3\117\IMG_0001.png")
+        if path is not None:
+            self.doc_img = pygame.image.load(path)
+        else:
+            self.doc_img = pygame.image.load(r"C:\Users\usuario\Desktop\document\1823-L119.M3\117\IMG_0001.png")
+
         self.img_c = self.doc_img.copy()
 
         self.scale = 1
@@ -28,7 +32,7 @@ class WinPygame:
                                                          int(self.doc_img.get_height() * self.scale)))
 
         if __name__ != "__main__":
-            self.control_panel = win_tkinter.WinControlPanel((self.pt1x, self.pt1y, self.pt2x, self.pt2y))
+            self.control_panel = win_tkinter.WinControlPanel(self, (self.pt1x, self.pt1y, self.pt2x, self.pt2y))
 
     def main_loop(self):
         for event in pygame.event.get():
@@ -57,6 +61,12 @@ class WinPygame:
         pygame.display.flip()
 
         self.clock.tick(60)
+
+    def update_img(self, path):
+        self.doc_img = pygame.image.load(path)
+        self.img_c = self.doc_img.copy()
+        self.scale = 1
+        self.originx, self.originy = (0, 0)
 
 if __name__ == "__main__":
     win = WinPygame()

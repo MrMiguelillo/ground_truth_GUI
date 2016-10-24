@@ -1,11 +1,13 @@
 import tkinter as tk
+from tkinter import messagebox
 import database
 import widgets
+import os
 from PIL import Image, ImageTk
 
 
 class WinControlPanel:
-    def __init__(self, coords):
+    def __init__(self, img_window, coords, paths):
         self.root = tk.Tk()
         self.root.geometry("500x570+30+30")
         
@@ -13,6 +15,8 @@ class WinControlPanel:
         self.db.load_seals()
 
         self.coords = coords
+        self.paths = paths
+        self.path_index = 0
         
         # POINT 1 DISPLAY
         self.pt1_label = tk.Label(self.root, text="Point 1:")
@@ -54,6 +58,22 @@ class WinControlPanel:
         self.seal_type_list.x = 20
         self.seal_type_list.y = 70
         self.seal_type_list.place_items()
+
+        # OK BUTTON
+        def on_ok_button():
+            if self.path_index < len(self.paths):
+                self.path_index += 1
+                onlyimages = [f for f in os.listdir(self.paths[self.path_index])
+                              if os.path.isfile(os.path.join(self.paths[self.path_index], f)) and f.endswith('.png')]
+
+                img_window.update_img(self.paths[self.path_index]+onlyimages[0])
+                # TODO!!: Comprobar que esto devuelve la ruta hacia la imagen correctamente construida
+            else:
+                messagebox.showinfo("End of classification", "There are no more documents to classify")
+
+        # TODO: 3. Insertar elemento en la tabla documentos.
+
+        self.ok_button = tk.Button(self.root, text='OK', command=on_ok_button)
 
     def update_labels(self, new_coords):
         self.pt1x_value.set(str(new_coords[0]))
@@ -102,15 +122,14 @@ class WinNewSeal:
 
     def on_ok_button(self):
         self.db.insert_seal(self.name_info.get(), self.author_info.get())
-        # now, save seal image
+        # TODO: now, save seal image
         # img = Image.open()
         self.root.destroy()
 
 
 if __name__ == "__main__":
-    win = WinControlPanel((10, 20, 30, 40))
+    win = WinControlPanel(None, (10, 20, 30, 40), None)
     while 1:
         win.root.update_idletasks()
         win.root.update()
 
-# TODO: add 'new seal' button plus its corresponding form
