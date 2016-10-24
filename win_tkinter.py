@@ -1,54 +1,114 @@
 import tkinter as tk
 import database
 import widgets
+from PIL import Image, ImageTk
 
 
-class WinTkinter:
-    def __init__(self):
+class WinControlPanel:
+    def __init__(self, coords):
         self.root = tk.Tk()
         self.root.geometry("500x570+30+30")
         
         self.db = database.Database('docs_osborne', 'testuser', 'test123', ('sellos', 'documentos'))
         self.db.load_seals()
+
+        self.coords = coords
         
         # POINT 1 DISPLAY
         self.pt1_label = tk.Label(self.root, text="Point 1:")
         self.pt1_label.place(x=20, y=10)
         
-        self.pt1x_value = tk.StringVar()
+        self.pt1x_value = tk.IntVar()
         self.pt1x_info = tk.Entry(self.root, state=tk.DISABLED, textvariable=self.pt1x_value)
         self.pt1x_info.place(x=70, y=10, width=50)
-        self.pt1x_value.set("hola")
+        self.pt1x_value.set(str(coords[0]))
         
-        self.pt1y_value = tk.StringVar()
+        self.pt1y_value = tk.IntVar()
         self.pt1y_info = tk.Entry(self.root, state=tk.DISABLED, textvariable=self.pt1y_value)
         self.pt1y_info.place(x=130, y=10, width=50)
-        self.pt1y_value.set("hola")
+        self.pt1y_value.set(str(coords[1]))
 
         # POINT 2 DISPLAY
         self.pt2_label = tk.Label(self.root, text="Point 2:")
         self.pt2_label.place(x=20, y=30)
         
-        self.pt2x_value = tk.StringVar()
+        self.pt2x_value = tk.IntVar()
         self.pt2x_info = tk.Entry(self.root, state=tk.DISABLED, textvariable=self.pt2x_value)
         self.pt2x_info.place(x=70, y=30, width=50)
-        self.pt2x_value.set("hola")
+        self.pt2x_value.set(str(coords[2]))
         
-        self.pt2y_value = tk.StringVar()
+        self.pt2y_value = tk.IntVar()
         self.pt2y_info = tk.Entry(self.root, state=tk.DISABLED, textvariable=self.pt2y_value)
         self.pt2y_info.place(x=130, y=30, width=50)
-        self.pt2y_value.set("hola")
+        self.pt2y_value.set(str(coords[3]))
+
+        # NEW SEAL WINDOW
+        def on_new_seal():
+            self.new_seal_win = WinNewSeal(self.db, (self.pt1x_value.get(), self.pt1y_value.get(),
+                                                     self.pt2x_value.get(), self.pt2y_value.get()))
+        self.new_seal_butt = tk.Button(self.root, text='New', command=on_new_seal)
+        self.new_seal_butt.place(x=200, y=20)
 
         # SEAL SELECTION ITEMS
         self.seal_type_list = widgets.SealsList(self.root, self.db)
-        # self.seal_type_list.init_option_menu()
         self.seal_type_list.x = 20
         self.seal_type_list.y = 70
         self.seal_type_list.place_items()
 
+    def update_labels(self, new_coords):
+        self.pt1x_value.set(str(new_coords[0]))
+        self.pt1y_value.set(str(new_coords[1]))
+        self.pt2x_value.set(str(new_coords[2]))
+        self.pt2y_value.set(str(new_coords[3]))
+
+
+class WinNewSeal:
+    def __init__(self, db, coords):
+        self.db = db
+
+        self.root = tk.Tk()
+        self.width = 300
+        self.height = 100
+        geom_str = "%ix%i+30+30" % (self.width, self.height)
+        self.root.geometry(geom_str)
+
+        # SEAL INFO
+        self.name_label = tk.Label(self.root, text='Nombre')
+        self.name_label.place(x=20, y=10)
+        # self.seal_name = tk.StringVar()
+        self.name_info = tk.Entry(self.root)  # , textvariable=self.seal_name)
+        self.name_info.place(x=70, y=10)
+
+        self.author_label = tk.Label(self.root, text='Autor')
+        self.author_label.place(x=20, y=40)
+        # self.seal_author = tk.StringVar()
+        self.author_info = tk.Entry(self.root)  # , textvariable=self.seal_author)
+        self.author_info.place(x=70, y=40)
+
+        # SEAL PREVIEW
+        # self.canvas = tk.Canvas(self.root, width=600, height=400)  # <--CANVAS
+        # self.img_route = self.db.seal_list[0].img_route
+        # self.img_route = self.img_route.replace("\\", "/")
+        # photo = Image.open(self.img_route)
+        # cropped = photo.crop((coords[0], coords[1], coords[2], coords[3]))
+        # tk_cropped = ImageTk.PhotoImage(cropped)
+        # # photo = tk.PhotoImage(file=self.img_route)
+        # self.seal_img = self.canvas.create_image(0, 0, anchor=tk.NW, image=tk_cropped)
+        # self.canvas.image = tk_cropped
+
+        # OK BUTTON
+        self.ok_button = tk.Button(self.root, text='OK', command=self.on_ok_button)
+        self.ok_button.place(x=200, y=20)
+
+    def on_ok_button(self):
+        self.db.insert_seal(self.name_info.get(), self.author_info.get())
+        # now, save seal image
+        # img = Image.open()
+        self.root.destroy()
+
 
 if __name__ == "__main__":
-    win = WinTkinter()
+    win = WinControlPanel((10, 20, 30, 40))
     while 1:
         win.root.update_idletasks()
         win.root.update()

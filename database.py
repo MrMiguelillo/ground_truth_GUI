@@ -17,9 +17,9 @@ class Database:
             result = self.cursor.fetchall()
 
             for row in result:
-                name = row[1]
-                author = row[2]
-                route = row[3]
+                name = row[0]
+                author = row[1]
+                route = row[2]
                 new_seal = seal.Seal(route, name, author)
                 self.seal_list.append(new_seal)
         except RuntimeError:
