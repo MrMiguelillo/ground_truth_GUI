@@ -72,11 +72,10 @@ class WinControlPanel:
                               if os.path.isfile(os.path.join(self.paths[self.path_index], f)) and f.endswith('.png')]
 
                 # Llamar método de ventana de pygame que actualiza a la nueva imagen
-                img_window.update_img(self.paths[self.path_index] + '/' + onlyimages[0])
+                if __name__ != "__main__":
+                    img_window.update_img(self.paths[self.path_index] + '/' + onlyimages[0])
             else:
                 messagebox.showinfo("End of classification", "There are no more documents to classify")
-
-        # TODO: img_window.update_img wont work!
 
         self.ok_button = tk.Button(self.root, text='OK', command=on_ok_button)
         self.ok_button.place(x=250, y=20)

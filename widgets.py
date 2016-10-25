@@ -21,7 +21,7 @@ class SealsList:
         self.seal_img = self.canvas.create_image(0, 0, anchor=tk.NW, image=photo)
         self.canvas.image = photo
 
-        self.change_button = tk.Button(master, text="OK", command=self.on_change_item)
+        self.change_button = tk.Button(master, text="Change", command=self.on_change_item)
 
     def on_change_item(self):
         index = self.OPTIONS.index(self.curr_seal_type.get())
