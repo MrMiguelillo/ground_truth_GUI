@@ -66,14 +66,15 @@ class WinControlPanel:
                 onlyimages = [f for f in os.listdir(self.paths[self.path_index])
                               if os.path.isfile(os.path.join(self.paths[self.path_index], f)) and f.endswith('.png')]
 
-                img_window.update_img(self.paths[self.path_index]+onlyimages[0])
-                # TODO!!: Comprobar que esto devuelve la ruta hacia la imagen correctamente construida
+                # Llamar método de ventana de pygame que actualiza a la nueva imagen
+                img_window.update_img(self.paths[self.path_index] + '/' + onlyimages[0])
             else:
                 messagebox.showinfo("End of classification", "There are no more documents to classify")
 
         # TODO: 3. Insertar elemento en la tabla documentos.
 
         self.ok_button = tk.Button(self.root, text='OK', command=on_ok_button)
+        self.ok_button.place(x=250, y=20)
 
     def update_labels(self, new_coords):
         self.pt1x_value.set(str(new_coords[0]))
@@ -128,7 +129,21 @@ class WinNewSeal:
 
 
 if __name__ == "__main__":
-    win = WinControlPanel(None, (10, 20, 30, 40), None)
+    path = 'C:/Users/usuario/Desktop/Document'
+    walk = os.walk(path)
+
+    doc_paths = []
+    for root, dirs, files in walk:
+        there_is_any_img = False
+        for curr_file in files:
+            if curr_file.endswith(".png"):
+                there_is_any_img = True
+
+        if there_is_any_img:
+            root = root.replace("\\", "/")
+            doc_paths.append(root)
+
+    win = WinControlPanel(None, (10, 20, 30, 40), doc_paths)
     while 1:
         win.root.update_idletasks()
         win.root.update()
