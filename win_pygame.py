@@ -71,6 +71,15 @@ class WinPygame:
         self.scale = 1
         self.originx, self.originy = (0, 0)
 
+    def save_seal(self, name):
+        width = self.pt2x - self.pt1x
+        height = self.pt2y - self.pt1y
+        cropped = pygame.Surface((abs(width), abs(height)))
+        cropped.blit(self.doc_img, (0, 0), (self.pt1x, self.pt1y, width, height))
+
+        pygame.image.save(cropped, 'C:/Users/usuario/Desktop/new_base/' + name + '.png')
+        # TODO: Se supone que no se van a introducir dos con el mismo nombre -> probar si se sobreescriben o da error!!
+
 if __name__ == "__main__":
     win = WinPygame()
     while 1:

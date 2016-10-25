@@ -48,8 +48,7 @@ class WinControlPanel:
 
         # NEW SEAL WINDOW
         def on_new_seal():
-            self.new_seal_win = WinNewSeal(self.db, (self.pt1x_value.get(), self.pt1y_value.get(),
-                                                     self.pt2x_value.get(), self.pt2y_value.get()))
+            self.new_seal_win = WinNewSeal(self.db, img_window)
         self.new_seal_butt = tk.Button(self.root, text='New', command=on_new_seal)
         self.new_seal_butt.place(x=200, y=20)
 
@@ -88,8 +87,9 @@ class WinControlPanel:
 
 
 class WinNewSeal:
-    def __init__(self, db, coords):
+    def __init__(self, db, img_win):
         self.db = db
+        self.img_win = img_win
 
         self.root = tk.Tk()
         self.width = 300
@@ -127,8 +127,7 @@ class WinNewSeal:
 
     def on_ok_button(self):
         self.db.insert_seal(self.name_info.get(), self.author_info.get())
-        # TODO: now, save seal image
-        # img = Image.open()
+        self.img_win.save_seal(self.name_info.get())
         self.root.destroy()
 
 
