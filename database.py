@@ -36,3 +36,15 @@ class Database:
         except RuntimeError:
             self.db.rollback()
             print("unable to insert data into database\n")
+
+    def insert_document(self, route, seal_name, coords):
+        sql = """insert into %s(ruta, sello, coordenadas_x1, coordenadas_y1, coordenadas_x2, coordenadas_y2)
+            values ('%s', '%s', '%s', '%s', '%s', '%s')""" % (self.table_names[1], route, seal_name,
+                                                              coords[0], coords[1], coords[2], coords[3])
+
+        try:
+            self.cursor.execute(sql)
+            self.db.commit()
+        except RuntimeError:
+            self.db.rollback()
+            print("unable to insert data into database\n")

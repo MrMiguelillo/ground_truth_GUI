@@ -61,6 +61,11 @@ class WinControlPanel:
 
         # OK BUTTON
         def on_ok_button():
+            self.db.insert_document(self.paths[self.path_index],
+                                    self.seal_type_list.curr_seal_type.get(),
+                                    (self.pt1x_value.get(), self.pt1y_value.get(),
+                                     self.pt2x_value.get(), self.pt2y_value.get()))
+
             if self.path_index < len(self.paths):
                 self.path_index += 1
                 onlyimages = [f for f in os.listdir(self.paths[self.path_index])
@@ -71,7 +76,7 @@ class WinControlPanel:
             else:
                 messagebox.showinfo("End of classification", "There are no more documents to classify")
 
-        # TODO: 3. Insertar elemento en la tabla documentos.
+        # TODO: img_window.update_img wont work!
 
         self.ok_button = tk.Button(self.root, text='OK', command=on_ok_button)
         self.ok_button.place(x=250, y=20)
