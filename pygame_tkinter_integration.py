@@ -16,8 +16,7 @@ for root, dirs, files in walk:
         root = root.replace("\\", "/")
         doc_paths.append(root)
 
-doc_win = win_pygame.WinPygame()
-# control_panel = win_tkinter.WinControlPanel()
+doc_win = win_pygame.WinPygame(doc_paths)
 
 while 1:
     doc_win.main_loop()

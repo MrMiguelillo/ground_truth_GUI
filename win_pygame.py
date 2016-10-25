@@ -1,3 +1,4 @@
+import os
 import sys
 import pygame
 from pygame_functions import PygameFunctions as pf
@@ -15,7 +16,9 @@ class WinPygame:
         self.screen = pygame.display.set_mode(self.size)
 
         if path is not None:
-            self.doc_img = pygame.image.load(path)
+            onlyimages = [f for f in os.listdir(path[0])
+                          if os.path.isfile(os.path.join(path[0], f)) and f.endswith('.png')]
+            self.doc_img = pygame.image.load(path[0] + '/' + onlyimages[0])
         else:
             self.doc_img = pygame.image.load(r"C:\Users\usuario\Desktop\document\1823-L119.M3\117\IMG_0001.png")
 
@@ -32,7 +35,7 @@ class WinPygame:
                                                          int(self.doc_img.get_height() * self.scale)))
 
         if __name__ != "__main__":
-            self.control_panel = win_tkinter.WinControlPanel(self, (self.pt1x, self.pt1y, self.pt2x, self.pt2y))
+            self.control_panel = win_tkinter.WinControlPanel(self, (self.pt1x, self.pt1y, self.pt2x, self.pt2y), path)
 
     def main_loop(self):
         for event in pygame.event.get():
