@@ -40,7 +40,8 @@ class WinPygame:
     def main_loop(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE):
-                sys.exit()
+                if __name__ == "__main__":  # If there is a control panel, closing will be handled there.
+                    sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1 or event.button == 3:
                     pf.clear_old_rect(self.img_c, self.doc_img, (self.pt1x, self.pt1y, self.pt2x, self.pt2y), event.button)

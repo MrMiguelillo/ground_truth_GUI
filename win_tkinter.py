@@ -79,6 +79,12 @@ class WinControlPanel:
         self.ok_button = tk.Button(self.root, text='OK', command=on_ok_button)
         self.ok_button.place(x=250, y=20)
 
+        def on_closing():
+            if messagebox.askokcancel("Quit", "Do you want to quit?"):
+                self.root.destroy()
+
+        self.root.protocol("WM_DELETE_WINDOW", on_closing)
+
     def update_labels(self, new_coords):
         self.pt1x_value.set(str(new_coords[0]))
         self.pt1y_value.set(str(new_coords[1]))
