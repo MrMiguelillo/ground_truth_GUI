@@ -6,7 +6,7 @@ import win_tkinter
 
 
 class WinPygame:
-    def __init__(self, path=None):
+    def __init__(self, path=None, index=0):
         self.size = self.width, self.height = 1200, 650
         self.speed = [1, 1]
         self.black = 0, 0, 0
@@ -16,9 +16,9 @@ class WinPygame:
         self.screen = pygame.display.set_mode(self.size)
 
         if path is not None:
-            onlyimages = [f for f in os.listdir(path[0])
-                          if os.path.isfile(os.path.join(path[0], f)) and f.endswith('.png')]
-            self.doc_img = pygame.image.load(path[0] + '/' + onlyimages[0])
+            onlyimages = [f for f in os.listdir(path[index])
+                          if os.path.isfile(os.path.join(path[index], f)) and f.endswith('.png')]
+            self.doc_img = pygame.image.load(path[index] + '/' + onlyimages[0])
         else:
             self.doc_img = pygame.image.load(r"C:\Users\usuario\Desktop\document\1823-L119.M3\117\IMG_0001.png")
 
@@ -35,7 +35,7 @@ class WinPygame:
                                                          int(self.doc_img.get_height() * self.scale)))
 
         if __name__ != "__main__":
-            self.control_panel = win_tkinter.WinControlPanel(self, (self.pt1x, self.pt1y, self.pt2x, self.pt2y), path)
+            self.control_panel = win_tkinter.WinControlPanel(self, (self.pt1x, self.pt1y, self.pt2x, self.pt2y), path, index)
 
     def main_loop(self):
         for event in pygame.event.get():

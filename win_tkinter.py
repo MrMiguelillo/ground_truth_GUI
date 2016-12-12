@@ -7,7 +7,7 @@ from PIL import Image, ImageTk
 
 
 class WinControlPanel:
-    def __init__(self, img_window, coords, paths):
+    def __init__(self, img_window, coords, paths, index):
         self.root = tk.Tk()
         self.root.geometry("500x570+30+30")
         
@@ -16,7 +16,7 @@ class WinControlPanel:
 
         self.coords = coords
         self.paths = paths
-        self.path_index = 0
+        self.path_index = index
         
         # POINT 1 DISPLAY
         self.pt1_label = tk.Label(self.root, text="Point 1:")
@@ -81,6 +81,9 @@ class WinControlPanel:
 
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
+                index_file = open('C:/Users/usuario/Desktop/Document/index.txt', 'w')
+                index_file.write(str(self.path_index))
+                index_file.close()
                 self.root.destroy()
 
         self.root.protocol("WM_DELETE_WINDOW", on_closing)
