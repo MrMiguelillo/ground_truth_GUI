@@ -16,3 +16,8 @@ For this code to work, a mySQL database properly setup is needed. A set of image
 file called index.txt that is used as an index pointing to the next image to be cataloged.
 
 More detailed instructions on the database setup as well as the file structure coming soon.
+
+
+Known bugs:
+  1) Storing a new seal prototype does not make it appear in the seal list (restarting required).
+  2) Storing a new seal won't automatically catalog the given document, its necesary to do it again.
