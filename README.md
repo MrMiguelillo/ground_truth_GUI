@@ -15,6 +15,8 @@ data to the database.
 For this code to work, a mySQL database properly setup is needed. A set of images is needed as well. The last requirement is a txt
 file called index.txt that is used as an index pointing to the next image to be cataloged.
 
+The MAIN SCRIPT TO RUN is pygame_tkinter_integration.py.
+
 More detailed instructions on the database setup as well as the file structure coming soon.
 
 
