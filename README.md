@@ -22,4 +22,4 @@ More detailed instructions on the database setup as well as the file structure c
 
 Known bugs:
   1) Storing a new seal prototype does not make it appear in the seal list (restarting required).
-  2) Storing a new seal won't automatically catalog the given document, its necesary to do it again.
+  2) Storing a new seal from a document won't automatically catalog the given document, its necesary to do it again.
