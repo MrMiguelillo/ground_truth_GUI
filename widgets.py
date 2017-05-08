@@ -1,5 +1,10 @@
+"""
+Archivo destinado a agrupar elementos de la interfaz que deban ir todos juntos. Al final tan sólo contiene la lista
+de sellos incluyendo el menú desplegable, la lista de éstos, la imagen de muestra correspondiente a dicho sello y
+el botón que sirve para cambiar dicha imagen.
+"""
+
 import tkinter as tk
-from tkinter import messagebox
 
 
 class SealsList:

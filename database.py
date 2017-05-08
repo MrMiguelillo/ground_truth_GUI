@@ -1,6 +1,8 @@
 import pymysql
 import seal
 
+from config import path_to_seals
+
 
 class Database:
     def __init__(self, db_name, user_name, passwd, tables):
@@ -26,7 +28,7 @@ class Database:
             print("error: unable to fetch seals data\n")
 
     def insert_seal(self, name, author):
-        path = "C:/Users/usuario/Desktop/new_base/" + name + ".png"
+        path = path_to_seals + name + ".png"
         sql = """insert into %s(nombre, autor, ruta, añadido_manual)
                  values ('%s', '%s', '%s', 1)""" % (self.table_names[0], name, author, path)
 

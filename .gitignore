@@ -1,4 +1,5 @@
 .idea/
 *.gif
 *.png
+
 __pycache__/

@@ -15,11 +15,14 @@ data to the database.
 For this code to work, a mySQL database properly setup is needed. A set of images is needed as well. The last requirement is a txt
 file called index.txt that is used as an index pointing to the next image to be cataloged.
 
-The MAIN SCRIPT TO RUN is pygame_tkinter_integration.py.
+The MAIN SCRIPT TO RUN is main.py.
 
 More detailed instructions on the database setup as well as the file structure coming soon.
 
 
-Known bugs:
+Known issues:
   1) Storing a new seal prototype does not make it appear in the seal list (restarting required).
   2) Storing a new seal from a document won't automatically catalog the given document, its necesary to do it again.
+  3) Clicking on the 'X' from the control pannel will throw an exception after closing the application.
+  4) Reaching the last document will throw an out of bounds index exception instead of a gentle message.
+  5) When prototypes are too big, they are only partially showed on the canvas from the control panel

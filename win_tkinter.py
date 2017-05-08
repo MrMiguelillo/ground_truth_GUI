@@ -3,15 +3,19 @@ from tkinter import messagebox
 import database
 import widgets
 import os
-from PIL import Image, ImageTk
+
+from config import path_to_documents
+from config import db_credentials
+from config import path_to_index
 
 
 class WinControlPanel:
-    def __init__(self, img_window, coords, paths, index):
+    def __init__(self, img_window, coords, paths, index=0):
         self.root = tk.Tk()
         self.root.geometry("500x570+30+30")
         
-        self.db = database.Database('docs_osborne', 'testuser', 'test123', ('sellos', 'documentos'))
+        self.db = database.Database(db_credentials['db_name'], db_credentials['user_name'],
+                                    db_credentials['pwd'], db_credentials['tables'])
         self.db.load_seals()
 
         self.coords = coords
@@ -81,7 +85,7 @@ class WinControlPanel:
 
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
-                index_file = open('C:/Users/usuario/Desktop/Document/index.txt', 'w')
+                index_file = open(path_to_index + '/index.txt', 'w')
                 index_file.write(str(self.path_index))
                 index_file.close()
                 self.root.destroy()
@@ -141,7 +145,7 @@ class WinNewSeal:
 
 
 if __name__ == "__main__":
-    path = 'C:/Users/usuario/Desktop/Document'
+    path = path_to_documents
     walk = os.walk(path)
 
     doc_paths = []

@@ -1,15 +1,19 @@
-import os
-import win_pygame
-
 """
 main.py se encarga de proveer a las ventanas de una lista que contenga el directorio de cada una de las imágenes. Además
 le pasa el índice para saber por qué imagen nos quedamos la última vez. También mantiene los bucles infinitos de las
 ventanas
 """
+import os
+import win_pygame
 
-path = 'C:/Users/usuario/Desktop/Document'
+from config import path_to_documents
+from config import path_to_index
+
+
+path = path_to_documents
+index_path = path_to_index
 walk = os.walk(path)
-index_file = open(path + '/' + 'index.txt')
+index_file = open(index_path + '/' + 'index.txt')
 index = int(index_file.read())
 index_file.close()
 
