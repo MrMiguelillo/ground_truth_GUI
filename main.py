@@ -1,6 +1,11 @@
 import os
 import win_pygame
 
+"""
+main.py se encarga de proveer a las ventanas de una lista que contenga el directorio de cada una de las imágenes. Además
+le pasa el índice para saber por qué imagen nos quedamos la última vez. También mantiene los bucles infinitos de las
+ventanas
+"""
 
 path = 'C:/Users/usuario/Desktop/Document'
 walk = os.walk(path)
